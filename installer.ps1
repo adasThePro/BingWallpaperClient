@@ -9,7 +9,7 @@ param(
 )
 
 $Script:AppName = "BingWallpaperClient"
-$Script:Version = "1.0.0"
+$Script:Version = "1.0.1"
 $Script:InstallPath = "$env:LOCALAPPDATA\$Script:AppName"
 $Script:TaskName = "BingWallpaperSync"
 $Script:ConfigPath = "$Script:InstallPath\config.json"
@@ -85,6 +85,7 @@ $Script:SourceFiles = @{
         "markets.json"
     )
     Installer = "installer.ps1"
+    SetWallpaper = "SetWallpaper.cs"
 }
 
 function Compile-SetWallpaper {
