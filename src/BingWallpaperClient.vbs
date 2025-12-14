@@ -3,7 +3,7 @@
 Option Explicit
 
 Const APP_NAME = "BingWallpaperClient"
-Const APP_VERSION = "1.0.0"
+Const APP_VERSION = "1.0.1"
 
 Dim objFSO, objShell
 Set objFSO = CreateObject("Scripting.FileSystemObject")
