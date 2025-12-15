@@ -37,7 +37,7 @@ A lightweight CLI tool that automatically downloads and sets Bing's daily image 
 ## Why BWC?
 <div align="center">
 
-| Feature                 | Bing Wallpaper Client   | Official Bing Wallpaper App |
+| Feature                 | BWC                     | Official Bing Wallpaper App |
 |-------------------------|-------------------------|-------------------------|
 | **Size**                | ~100 KB                 | 200+ MB                 |
 | **Telemetry**           | None                    | Yes                     |
@@ -57,58 +57,73 @@ A lightweight CLI tool that automatically downloads and sets Bing's daily image 
 
 ## Quick Start
 
-1. Download the repository as a zip from [here](https://github.com/adasThePro/BingWallpaperClient/releases).
-2. Press `Win + R`, type `powershell`, and press Enter to open PowerShell.
-3. Navigate to the unzipped `bwc` directory:
+**Step 1: Download**
+- Download the latest release from [here](https://github.com/adasThePro/BingWallpaperClient/releases)
+- Extract the ZIP file to your desktop (e.g., `C:\Users\YourName\Desktop\bwc`)
+
+**Step 2: Open PowerShell**
+- Press `Win + R`, type `powershell`, and press Enter
+- Or search for "PowerShell" in the Start menu
+
+**Step 3: Navigate to Installation Folder**
 ```powershell
 cd "$HOME\Desktop\bwc"
 ```
-4. Run the installer script:
+
+**Step 4: Run Installer**
 ```powershell
-# Temporarily bypass execution policy to run the installer
+# Allow script execution for this session
 Set-ExecutionPolicy Bypass -Scope Process -Force
+
 # Run the installer
 .\installer.ps1
-# To install without compiling SetWallpaper.exe (use existing one or if failed to compile)
-./installer.ps1 -SkipCompile
 ```
-5. Follow the interactive setup prompts to configure:
-    - Market/region (e.g., en-US, ja-JP, fr-FR)
-    - Download path for images (default: `%USERPROFILE%\Pictures\BingWallpapers`)
-    - Maximum images to keep (0 for unlimited, default: 30)
-    - Whether to automatically change desktop wallpaper
 
-**The installer will:**
-- Compile the `SetWallpaper.exe` component
-- Copy application files to `%LOCALAPPDATA%\BingWallpaperClient`
-- Create a scheduled task
-- Add BWC to user's PATH environment variable
-- Save your configuration
+### What Installer Does?
+
+The installer automatically:
+- Compiles `SetWallpaper.exe`
+- Copies application files to `%LOCALAPPDATA%\BingWallpaperClient`
+- Creates Windows scheduled task for automatic updates
+- Adds `bwc` command to your PATH
+- Saves your configuration preferences
+
+### Advanced Options
+
+**Skip Compilation** (use existing `SetWallpaper.exe`):
+```powershell
+.\installer.ps1 -SkipCompile
+```
+
+**Uninstall BWC**:
+```powershell
+.\installer.ps1 -Action uninstall
+```
 
 ## Usage
 
-1. Check status and configuration:
+Check status and configuration:
 ```powershell
 bwc status
 ```
 
-2. Manually apply wallpaper:
+Manually apply wallpaper:
 ```powershell
 bwc apply
 ```
 
-3. Open configuration file:
+Open configuration file:
 ```powershell
 bwc config
 ```
 
-4. View help or installation version:
+View help or installation version:
 ```powershell
 bwc help
 bwc version
 ```
 
-5. Uninstall BWC:
+Uninstall BWC:
 ```powershell
 bwc uninstall
 ```
