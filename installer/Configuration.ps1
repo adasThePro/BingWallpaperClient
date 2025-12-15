@@ -19,13 +19,13 @@ function Get-UserConfiguration {
             Write-ColorOutput "[!] Market code cannot be empty. Please try again." "Yellow"
             continue
         } elseif ($marketCodes -contains $marketCode) {
-            $marketName = ($Global:BingMarkets | Where-Object { $_.Code -eq $marketCode }).Name
-            Write-ColorOutput "[i] Selected market: $marketName ($marketCode)" "Cyan"
+            $selectedMarket = $Global:BingMarkets | Where-Object { $_.Code -eq $marketCode }
+            Write-ColorOutput "[i] Selected market: $($selectedMarket.Name) ($($selectedMarket.Code))" "Cyan"
             Write-Host ""
             Write-Host "Confirm market? (Y/n): " -NoNewLine
             $confirmation = Read-Host
             if ($confirmation -eq "" -or $confirmation.ToLower() -eq "y") {
-                $config.Market = $marketCode
+                $config.Market = $selectedMarket.Code
                 $validMarket = $true
             }
         } else {
