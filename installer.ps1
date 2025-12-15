@@ -9,7 +9,7 @@ param(
 )
 
 $Script:AppName = "BingWallpaperClient"
-$Script:Version = "1.0.2"
+$Script:Version = "1.0.3"
 $Script:InstallPath = "$env:LOCALAPPDATA\$Script:AppName"
 $Script:TaskName = "BingWallpaperSync"
 $Script:ConfigPath = "$Script:InstallPath\config.json"

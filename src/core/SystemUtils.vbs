@@ -84,27 +84,41 @@ Function TestNetworkConnectivity()
 End Function
 
 Function TestBingApiReachability(strMarket)
+    TestBingApiReachability = False
     On Error Resume Next
-    Dim objHTTP, strUrl
 
-    strUrl = "https://services.bingapis.com/ge-apps/api/v2/bwc/hpimages?mkt=" & strMarket
-
+    Dim objHTTP, strUrl, intStatus
     Set objHTTP = CreateObject("MSXML2.ServerXMLHTTP.6.0")
-    If Err.Number <> 0 Then 
+    
+    If Err.Number <> 0 Then
         Err.Clear
         Set objHTTP = CreateObject("MSXML2.ServerXMLHTTP.3.0")
     End If
-
-    objHTTP.Open "HEAD", strUrl, False
-    objHTTP.setRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    objHTTP.Send
-
-    If Err.Number = 0 And objHTTP.Status = 200 Then
-        TestBingApiReachability = True
-    Else
-        TestBingApiReachability = False
+    
+    If Err.Number <> 0 Or objHTTP Is Nothing Then
+        On Error GoTo 0
+        Exit Function
     End If
-
+    
+    strUrl = "https://services.bingapis.com/ge-apps/api/v2/bwc/hpimages?mkt=" & strMarket
+    
+    With objHTTP
+        .Open "HEAD", strUrl, False
+        .setRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        .Send
+        
+        If Err.Number <> 0 Then
+            On Error GoTo 0
+            Set objHTTP = Nothing
+            Exit Function
+        End If
+        
+        intStatus = .Status
+        If Err.Number = 0 And intStatus = 200 Then
+            TestBingApiReachability = True
+        End If
+    End With
+    
     On Error GoTo 0
     Set objHTTP = Nothing
 End Function
